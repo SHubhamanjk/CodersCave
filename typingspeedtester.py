@@ -13,13 +13,17 @@ def speedtime(time_s, time_e, user_input):
 # Function to count the number of mistakes in the user's input
 def mistakes(partest, user_input):
     error = 0
-    for i in range(len(partest)):
-        try:
-            if partest[i] != user_input[i]:
-                error += 1
-        except IndexError:
+    min_length = min(len(partest), len(user_input))
+    
+    for i in range(min_length):
+        if partest[i] != user_input[i]:
             error += 1
+
+    # Add the absolute difference in lengths to the error count
+    error += abs(len(partest) - len(user_input))
+
     return error
+
 
 # loop for the typing speed test
 while True:
